@@ -28,17 +28,10 @@ def preprocess(text):
 
 
 def extract_abstracts(file_path):
-    # Read the contents of the file
-    with open(file_path, 'r', encoding='utf-8') as file:
-        abstracts = file.readlines()
+    with open(file_path, 'r', encoding='utf-8') as f:
+        abstracts = f.readlines()
 
-   # Remove any leading or trailing whitespace characters from each line
-    abstracts = [abstract.strip() for abstract in abstracts if abstract.strip()]
-
-    # Track the number of abstracts
-    num_abstracts = len(abstracts)
-
-    return abstracts, num_abstracts
+    return [abstract.strip() for abstract in abstracts if abstract.strip()], len(abstracts)
 
 
 def process_keywords(keywords, output_file):
