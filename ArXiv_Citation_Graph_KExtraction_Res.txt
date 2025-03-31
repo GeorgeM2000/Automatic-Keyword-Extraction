@@ -1,0 +1,74 @@
+TFIDF 5 Time: 5.384681349999999
+% of Non-Words for TFIDF: 0.03061512415349887
+TFIDF 10 Time: 5.278176183333333
+% of Non-Words for TFIDF: 0.035499055970421065
+RAKE 5 Time: 1.5835915833333334
+% of Non-Words for RAKE: 0.21215053964048844
+RAKE 10 Time: 1.5940001
+% of Non-Words for RAKE: 0.1913477574055156
+YAKE 5 Time: 33.75282046666667
+% of Non-Words for YAKE: 0.0005793602896801448
+YAKE 10 Time: 40.876781
+% of Non-Words for YAKE: 0.0008118763896086897
+PosR 5 Time: 73.58920844999999
+% of Non-Words for PosR: 0.008199375027633135
+PosR 10 Time: 72.90015700000001
+% of Non-Words for PosR: 0.01221852257189885
+TextR 5 Time: 70.06458101666666
+% of Non-Words for TextR: 0.029957475552280507
+TextR 10 Time: 69.67811218333333
+% of Non-Words for TextR: 0.028932794921328202
+TopicR 5 Time: 101.45343305
+% of Non-Words for TopicR: 0.030885628893573172
+TopicR 10 Time: 101.16921705
+% of Non-Words for TopicR: 0.02976417186095667
+
+
+
+
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TFIDF5.txt: 4.851471594798084
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/RAKE5.txt: 24.458361852612367
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/YAKE5.txt: 11.814111339265343
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TextR5.txt: 12.38478211270819
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/PosR5.txt: 13.330880675336527
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TopicR5.txt: 8.893413947828732
+
+
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TFIDF10.txt: 9.657179253175146
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/RAKE10.txt: 43.19699216670469
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/YAKE10.txt: 21.498098714731157
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TextR10.txt: 24.516522168986235
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/PosR10.txt: 26.1979618221918
+Mean word count for ArXiv_Citation_Graph/graph-v2/Word_Counts/TopicR10.txt: 17.621473115826298
+
+
+
+Parallel 5P 100% of Nodes
+Time TF-IDF 5: 1.67428945
+Time TF-IDF 10: 1.6557726333333334
+
+Parallel 5P 15%(33142) of Nodes
+Time TF-IDF 5: 0.7148477
+Time TF-IDF 10: 0.73304285
+
+Parallel 5P 45%(47276) of Nodes
+Time TF-IDF 5: 1.74115615
+Time TF-IDF 10: 1.4972775666666667
+
+Parallel 5P 75%(51640) of Nodes
+Time TF-IDF 5: 2.25117755
+Time TF-IDF 10: 2.2597265500000003
+
+
+
+
+
+
+
+
+
+
+
+
+
+

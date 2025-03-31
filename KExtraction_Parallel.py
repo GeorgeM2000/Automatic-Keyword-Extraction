@@ -1,4 +1,6 @@
-import nltk; nltk.data.path.append("/home/pk/Context_Aware_Node_Embeddings/Downloads")
+import nltk; 
+#nltk.data.path.append("/home/pk/Context_Aware_Node_Embeddings/Downloads")
+nltk.data.path.append("/home/georgematlis/AUTH/DWS/NLP/Automatic_Keyword_Extraction_from_Documents/Downloads")
 import string
 import spacy
 import yake
@@ -64,22 +66,48 @@ def process_keywords(keywords, output_file):
 
     return total_word_count, total_non_word_count
 
+
+def filter_abstracts_by_edges(edge_file, abstracts):
+    unique_nodes = set()
+
+    # Read the edge file and collect unique node IDs
+    with open(edge_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            # Split on whitespace (handles both tabs and spaces)
+            node1, node2 = line.strip().split()
+            unique_nodes.add(int(node1))
+            unique_nodes.add(int(node2))
+
+    # Create a new list of abstracts for the unique nodes
+    filtered_abstracts = [abstracts[node] for node in unique_nodes if node < len(abstracts)]
+
+    return filtered_abstracts
+
 if __name__ == '__main__':
     
-    parent_path = 'Datasets/arxiv/graph-v2'
-    abstracts, num_abstracts = extract_abstracts(f'{parent_path}/data-v2.txt')
+    #parent_path = 'Datasets/arxiv/graph-v2'
+    parent_path = 'ArXiv_Citation_Graph/graph-v2'
+    abstracts, num_abstracts = extract_abstracts(f'{parent_path}/data-v2-500.txt')
+
+    filtered_abstracts = filter_abstracts_by_edges(f"{parent_path}/sgraph75.txt", abstracts)
+
+    num_abstracts = len(filtered_abstracts)
+    print(f'Filtered abstracts: {num_abstracts}')
+
+    abstracts = filtered_abstracts
+    
 
     T = [5, 10]
 
     
-    batch_size_15 = int(num_abstracts / 15)  # Small batch size for other extraction methods
-    #batch_size_5 = int(num_abstracts / 5)    # Larger batch size for TF-IDF
+    #batch_size_15 = int(num_abstracts / 15)  # Small batch size for other extraction methods
+    batch_size_5 = int(num_abstracts / 5)    # Larger batch size for TF-IDF
 
-    ranges_15 = []
-    #ranges_5 = []
+    #ranges_15 = []
+    ranges_5 = []
 
     # Generate 15-batch ranges
-    start = 0
+    """ start = 0
     while start < num_abstracts:
         end = min(start + batch_size_15, num_abstracts)
         ranges_15.append([start, end])
@@ -87,21 +115,21 @@ if __name__ == '__main__':
 
     # Merge last two batches to prevent small last batch
     ranges_15[-2][1] = ranges_15[-1][1]
-    del ranges_15[-1]
+    del ranges_15[-1] """
 
     # Generate 5-batch ranges
-    #start = 0
-    #while start < num_abstracts:
-    #    end = min(start + batch_size_5, num_abstracts)
-    #    ranges_5.append([start, end])
-    #    start = end
+    start = 0
+    while start < num_abstracts:
+        end = min(start + batch_size_5, num_abstracts)
+        ranges_5.append([start, end])
+        start = end
 
     # Merge last two batches to prevent small last batch
-    #ranges_5[-2][1] = ranges_5[-1][1]
-    #del ranges_5[-1]
+    ranges_5[-2][1] = ranges_5[-1][1]
+    del ranges_5[-1]
 
-    print(f'15 ranges: {ranges_15}\n')
-    #print(f'5 ranges for TF-IDF: {ranges_5}')
+    #print(f'15 ranges: {ranges_15}\n')
+    print(f'5 ranges for TF-IDF: {ranges_5}')
 
 
     # Preprocess the abstracts: remove punctuation and stopwords
@@ -113,27 +141,27 @@ if __name__ == '__main__':
 
 
     keywords = {
-        'RAKE5': None,
-        'YAKE5': None,
-        #'TFIDF5': None,
-        'TextR5': None,
-        'PositionR5': None,
-        'TopicR5': None,
+        #'RAKE5': None,
+        #'YAKE5': None,
+        'TFIDF5': None,
+        #'TextR5': None,
+        #'PositionR5': None,
+        #'TopicR5': None,
 
-        'RAKE10': None,
-        'YAKE10': None,
-        #'TFIDF10': None,
-        'TextR10': None,
-        'PositionR10': None,
-        'TopicR10': None
+        #'RAKE10': None,
+        #'YAKE10': None,
+        'TFIDF10': None,
+        #'TextR10': None,
+        #'PositionR10': None,
+        #'TopicR10': None
     }
 
-    """ for t in T:
-        keywords[f'TFIDF{t}'] = parallel_tfidf_processing(preprocessed_abstracts, ranges_5, t)
-        
-	time.sleep(20) """ 
-
     for t in T:
+        keywords[f'TFIDF{t}'] = parallel_tfidf_processing(preprocessed_abstracts, ranges_5, t)
+    
+    #time.sleep(20) 
+
+    """ for t in T:
         keywords[f'RAKE{t}'] = parallel_kextraction_processing(abstracts, ranges_15, t, 'RAKE', kextraction_method_obj=None)
         
     time.sleep(20)
@@ -176,12 +204,12 @@ if __name__ == '__main__':
     del positionrank
     gc.collect()
     
-    time.sleep(20)
+    time.sleep(20) """
 
 
 
 
-    for method, list_of_keywords in keywords.items():
+    """ for method, list_of_keywords in keywords.items():
         save_keywords_to_files(list_of_keywords, f'{parent_path}/Keywords/Parallel_Generated/{method}.txt')
         total_word_count, total_non_word_count = process_keywords(list_of_keywords, f'{parent_path}/Word_Counts/{method}.txt')
-        print(f'% of Non-Words for {method}: {total_non_word_count / total_word_count}')
+        print(f'% of Non-Words for {method}: {total_non_word_count / total_word_count}') """
